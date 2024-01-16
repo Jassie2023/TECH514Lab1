@@ -1,0 +1,17 @@
+#define ANALOG_PIN 34 // 选择连接到ESP32的模拟引脚
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int adcValue = analogRead(ANALOG_PIN); // 读取模拟值
+  float voltage = (adcValue / 4095.0) * 3.3; // 将ADC值转换为电压
+
+  Serial.print("ADC Value: ");
+  Serial.println(adcValue);
+  Serial.print("Voltage: ");
+  Serial.println(voltage);
+
+  delay(1000); 
+}
