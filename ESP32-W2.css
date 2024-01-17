@@ -1,17 +1,23 @@
-#define ANALOG_PIN 34 // 选择连接到ESP32的模拟引脚
+#include <Arduino.h>
+
+// Define constants
+const int ANALOG_PIN = A0;
+const int SERIAL_BAUD = 115200;
+const int DELAY_MS = 1000;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(SERIAL_BAUD);
+  pinMode(ANALOG_PIN, INPUT);
 }
 
 void loop() {
-  int adcValue = analogRead(ANALOG_PIN); // 读取模拟值
-  float voltage = (adcValue / 4095.0) * 3.3; // 将ADC值转换为电压
+  int analogValue = analogRead(ANALOG_PIN);
+  float voltage = analogValue * (5.0 / 1023.0);  // Arduino ADC is 10-bit
 
   Serial.print("ADC Value: ");
-  Serial.println(adcValue);
-  Serial.print("Voltage: ");
+  Serial.print(analogValue);
+  Serial.print(" Voltage: ");
   Serial.println(voltage);
 
-  delay(1000); 
+  delay(DELAY_MS);
 }
